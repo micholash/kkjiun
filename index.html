@@ -2,27 +2,17 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Stockfish AI 체스</title>
-    <link rel="stylesheet" href="chessboard.css">
+    <title>Pac-Man Clone</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>AI 체스 대국 (Stockfish)</h1>
+    <h1>팩맨 (Pac-Man)</h1>
     
-    <div id="controls">
-        <label for="playerColor">내 말 색상 선택:</label>
-        <select id="playerColor">
-            <option value="white">백 (White)</option>
-            <option value="black">흑 (Black)</option>
-            <option value="random">랜덤 선택</option>
-        </select>
-        <button onclick="startGame()">게임 시작</button>
-    </div>
+    <div id="score-display">점수: <span id="score">0</span></div>
+    <div id="game-grid">
+        </div>
+    <div id="status-message">게임을 시작하려면 화살표 키를 누르세요.</div>
 
-    <div id="board" style="width: 400px"></div>
-    <p id="status">게임을 시작해 주세요.</p>
-
-    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/js/chessboard.js"></script>
-    <script src="https://unpkg.com/chess.js@0.10.3/chess.js"></script>
-    <script src="game.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
