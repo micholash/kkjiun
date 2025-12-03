@@ -1,0 +1,95 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+#game-grid {
+    display: flex; /* 그리드를 플렉스로 감싸서 중앙 정렬 */
+    flex-wrap: wrap; /* 셀이 다음 줄로 넘어가게 함 */
+    width: 400px; /* (20 셀 * 20px) */
+    height: 400px; /* (20 셀 * 20px) */
+    border: 5px solid #fff;
+}
+
+.grid-cell {
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- 셀 타입 --- */
+.wall {
+    background-color: #0000FF; /* 벽은 파란색 */
+    border: 1px solid #0000FF;
+}
+
+.dot {
+    background-color: #000;
+}
+
+.dot::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.empty {
+    background-color: #000;
+}
+
+/* --- 캐릭터 --- */
+.pacman {
+    background-color: transparent;
+    border: 10px solid yellow; /* 팩맨 몸통 */
+    border-radius: 50%;
+    position: relative;
+    /* 입 모양을 위한 CSS: 오른쪽 방향 기본 */
+    border-top-color: transparent; 
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    animation: blink 0.5s step-end infinite; /* 입 벌림 효과 */
+}
+
+/* 팩맨 입 모양 애니메이션 */
+@keyframes blink {
+    0%, 100% {
+        transform: rotate(45deg); /* 입 닫힘 */
+    }
+    50% {
+        transform: rotate(0deg); /* 입 열림 */
+    }
+}
+
+.ghost {
+    background-color: red; /* 유령 기본 색상 */
+    width: 20px;
+    height: 20px;
+    border-radius: 50% 50% 0 0;
+    position: relative;
+}
+
+.blinky { background-color: red; }
+.pinky { background-color: pink; }
+.inky { background-color: cyan; }
+.clyde { background-color: orange; }
+
+/* 팩맨 회전 (움직이는 방향으로 입이 향하게) */
+.pacman-up { transform: rotate(-90deg); }
+.pacman-down { transform: rotate(90deg); }
+.pacman-left { transform: rotate(180deg); }
+.pacman-right { transform: rotate(0deg); } /* 기본 */
+
+
+/* 기타 UI */
+#score-display, #status-message {
+    margin: 10px 0;
+}
