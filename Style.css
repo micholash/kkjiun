@@ -1,83 +1,119 @@
+/* 전체 설정 */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background-color: #87CEEB; /* 맑은 하늘색 */
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 10px;
-    overscroll-behavior: none; /* 모바일 새로고침 당겨짐 방지 */
+    height: 100vh;
+    overflow: hidden; /* 스크롤 방지 */
+    user-select: none;
     touch-action: none; /* 모바일 터치 스크롤 방지 */
-    user-select: none; /* 텍스트 선택 방지 */
 }
 
-h1 { margin: 10px 0; font-size: 24px; }
-.info { margin-bottom: 15px; font-weight: bold; color: #555; }
+.header {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+    text-shadow: 2px 2px 0px #333;
+}
 
-/* 게임 보드 */
+h1 { margin: 5px 0; font-size: 28px; }
+.score-board { font-size: 16px; background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 20px; }
+
+/* 게임판 (둥지 느낌) */
 .board {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    gap: 8px;
-    background-color: #bbada0;
+    gap: 6px;
+    background-color: #5D4037; /* 나무색 */
     padding: 8px;
-    border-radius: 10px;
-    width: 90vw; /* 화면 꽉 차게 */
-    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 8px 0 #3E2723;
+    width: 90vw;
+    max-width: 380px;
     aspect-ratio: 1 / 1;
+    margin-top: 20px;
 }
 
-/* 슬롯 (칸) */
+/* 칸 (슬롯) */
 .slot {
-    background-color: #cdc1b4;
-    border-radius: 5px;
-    position: relative;
+    background-color: #D7CCC8;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
 }
 
-/* 아이템 */
+/* 비둘기 아이템 */
 .item {
     width: 90%;
     height: 90%;
-    border-radius: 50%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+    background: white;
+    border-radius: 10px;
     cursor: grab;
-    touch-action: none;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    transition: transform 0.1s;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
-/* 드래그 중인 아이템 (복제본) 스타일 */
+/* 이모지 크기 */
+.item .emoji { font-size: 32px; line-height: 1.2; }
+/* 레벨 숫자 */
+.item .level { font-size: 10px; color: #666; font-weight: bold; }
+
+/* 합쳐질 때 효과 */
+.pop-anim { animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes pop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1.0); }
+}
+
+/* 드래그 중인 복제본 */
 .dragging-clone {
     position: fixed;
     pointer-events: none;
-    z-index: 1000;
+    z-index: 9999;
     opacity: 0.9;
-    transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transform: scale(1.2) rotate(5deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    background: white;
+    border-radius: 10px;
+    width: 70px; height: 70px; /* 고정 크기 */
+    display: flex; justify-content: center; align-items: center; font-size: 30px;
 }
 
-/* 생성 버튼 */
-.generator-btn {
-    margin-top: 20px;
-    padding: 15px 0;
+/* 하단 버튼 영역 */
+.controls {
+    margin-top: auto;
+    margin-bottom: 30px;
+    text-align: center;
     width: 90vw;
-    max-width: 400px;
-    font-size: 18px;
-    background-color: #8f7a66;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 0 #7f6a56;
+    max-width: 380px;
 }
-.generator-btn:active { transform: translateY(4px); box-shadow: none; }
+
+.spawn-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #FF7043;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 0 #D84315;
+    cursor: pointer;
+}
+.spawn-btn:active { transform: translateY(5px); box-shadow: none; }
+.guide-text { margin-top: 10px; color: #333; font-size: 14px; opacity: 0.8; }
