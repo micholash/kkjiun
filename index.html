@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>모바일 머지 게임</title>
+    <title>전설의 비둘기 키우기</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Merge Game 20</h1>
-    <div class="info">최고 레벨: <span id="max-level">0</span> / 20</div>
-
-    <div class="board" id="board">
+    <div class="header">
+        <h1>🕊️ 비둘기 키우기</h1>
+        <div class="score-board">
+            최고 도달: <span id="max-level-name">비둘기 알</span> (Lv.<span id="max-level">1</span>)
         </div>
+    </div>
 
-    <button class="generator-btn" id="spawnBtn">⚡ 생성하기 (Click)</button>
+    <div class="board" id="board"></div>
+
+    <div class="controls">
+        <button class="spawn-btn" id="spawnBtn">
+            🥚 알 낳기 (Click)
+        </button>
+        <p class="guide-text">알을 드래그해서 합치세요!</p>
+    </div>
 
     <script src="script.js"></script>
 </body>
