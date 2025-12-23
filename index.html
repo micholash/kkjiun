@@ -2,16 +2,19 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Pac-Man Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>모바일 머지 게임</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>팩맨 (Pac-Man)</h1>
-    
-    <div id="score-display">점수: <span id="score">0</span></div>
-    <div id="game-grid">
+
+    <h1>Merge Game 20</h1>
+    <div class="info">최고 레벨: <span id="max-level">0</span> / 20</div>
+
+    <div class="board" id="board">
         </div>
-    <div id="status-message">게임을 시작하려면 화살표 키를 누르세요.</div>
+
+    <button class="generator-btn" id="spawnBtn">⚡ 생성하기 (Click)</button>
 
     <script src="script.js"></script>
 </body>
