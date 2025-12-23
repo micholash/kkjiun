@@ -2,26 +2,26 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>전설의 비둘기 키우기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>자유로운 비둘기 키우기</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="header">
-        <h1>🕊️ 비둘기 키우기</h1>
+        <h1>🕊️ 야생의 비둘기 키우기</h1>
         <div class="score-board">
-            최고 도달: <span id="max-level-name">비둘기 알</span> (Lv.<span id="max-level">1</span>)
+            최고 도달: <span id="max-level-name">없음</span> (Lv.<span id="max-level">0</span>)
         </div>
     </div>
 
-    <div class="board" id="board"></div>
+    <div id="game-area">
+        </div>
 
     <div class="controls">
         <button class="spawn-btn" id="spawnBtn">
             🥚 알 낳기 (Click)
         </button>
-        <p class="guide-text">알을 드래그해서 합치세요!</p>
     </div>
 
     <script src="script.js"></script>
