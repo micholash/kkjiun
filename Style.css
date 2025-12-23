@@ -1,101 +1,99 @@
 /* 전체 설정 */
 body {
-    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-    background-color: #87CEEB; /* 맑은 하늘색 */
+    font-family: 'Apple SD Gothic Neo', sans-serif;
+    background-color: #87CEEB;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    overflow: hidden; /* 스크롤 방지 */
+    height: 100vh; /* 세로 화면 꽉 채우기 */
+    overflow: hidden;
     user-select: none;
-    touch-action: none; /* 모바일 터치 스크롤 방지 */
+    touch-action: none;
 }
 
 .header {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
     color: white;
-    text-shadow: 2px 2px 0px #333;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+h1 { margin: 5px 0; font-size: 24px; }
+.score-board { font-size: 14px; background: rgba(0,0,0,0.3); padding: 5px 12px; border-radius: 15px; }
+
+/* 자유 게임 영역 (들판 느낌) */
+#game-area {
+    position: relative; /* 아이템들의 기준점 */
+    flex-grow: 1; /* 남은 공간 모두 차지 */
+    width: 100%;
+    background-color: #C5E1A5; /* 연두색 들판 */
+    background-image: 
+        radial-gradient(circle at 10% 20%, #AED581 5%, transparent 5%),
+        radial-gradient(circle at 90% 80%, #AED581 5%, transparent 5%); /* 풀 느낌 패턴 */
+    overflow: hidden; /* 영역 밖으로 나가는 것 방지 */
+    touch-action: none;
 }
 
-h1 { margin: 5px 0; font-size: 28px; }
-.score-board { font-size: 16px; background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 20px; }
-
-/* 게임판 (둥지 느낌) */
-.board {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 6px;
-    background-color: #5D4037; /* 나무색 */
-    padding: 8px;
-    border-radius: 12px;
-    box-shadow: 0 8px 0 #3E2723;
-    width: 90vw;
-    max-width: 380px;
-    aspect-ratio: 1 / 1;
-    margin-top: 20px;
-}
-
-/* 칸 (슬롯) */
-.slot {
-    background-color: #D7CCC8;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
-}
-
-/* 비둘기 아이템 */
+/* 비둘기 아이템 (절대 위치) */
 .item {
-    width: 90%;
-    height: 90%;
+    position: absolute; /* 자유로운 위치 배치 */
+    width: 70px;
+    height: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: white;
-    border-radius: 10px;
+    border-radius: 50%;
     cursor: grab;
-    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
-    transition: transform 0.1s;
-    position: relative;
-    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    /* 부드러운 이동을 위한 트랜지션 제거 (드래그 시 즉각 반응) */
+    touch-action: none;
+    z-index: 10; /* 기본 레이어 */
+}
+/* 드래그 중일 때 스타일 */
+.item.dragging {
+    opacity: 0.6;
+    z-index: 1000; /* 가장 위로 */
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-/* 이모지 크기 */
-.item .emoji { font-size: 32px; line-height: 1.2; }
-/* 레벨 숫자 */
-.item .level { font-size: 10px; color: #666; font-weight: bold; }
+/* 이모지 및 텍스트 */
+.item .emoji { font-size: 32px; line-height: 1; }
+.item .level { font-size: 11px; color: #555; font-weight: bold; margin-top: 2px; }
 
-/* 합쳐질 때 효과 */
-.pop-anim { animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+/* 뿅! 나타나는 효과 */
 @keyframes pop {
-    0% { transform: scale(0.8); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1.0); }
+    0% { transform: scale(0) rotate(-30deg); }
+    80% { transform: scale(1.1) rotate(10deg); }
+    100% { transform: scale(1) rotate(0deg); }
 }
+.pop-anim { animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-/* 드래그 중인 복제본 */
-.dragging-clone {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.9;
-    transform: scale(1.2) rotate(5deg);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-    background: white;
-    border-radius: 10px;
-    width: 70px; height: 70px; /* 고정 크기 */
-    display: flex; justify-content: center; align-items: center; font-size: 30px;
-}
-
-/* 하단 버튼 영역 */
+/* 하단 컨트롤 */
 .controls {
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.1);
+    z-index: 100;
+}
+.spawn-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #FF9800;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 0 #F57C00;
+    cursor: pointer;
+}
+.spawn-btn:active { transform: translateY(4px); box-shadow: none; }.controls {
     margin-top: auto;
     margin-bottom: 30px;
     text-align: center;
